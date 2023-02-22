@@ -1,18 +1,13 @@
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
-import PageHome from "./components/PageHome.vue";
-
 export default {
-  name: "App",
-  components: {
-    HelloWorld,
-    PageHome,
-  },
+  name: "App"
 };
 </script>
 
 <template>
-  <div class="container"><page-home></page-home></div>
+  <div class="container"><router-view></router-view></div>
 </template>
 
-<style scoped></style>
+<style scoped>
+@import "assets/style.css"
+</style>
