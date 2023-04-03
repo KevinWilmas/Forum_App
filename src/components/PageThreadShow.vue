@@ -1,10 +1,10 @@
 <script setup>
 import sourceData from "../data.json";
-import { ref } from "vue";
-import { computed } from "vue";
+import { ref, computed } from "vue";
+import { useRoute } from "vue-router";
 
-const thread = computed(
-  () => threads.value.find((thread) => thread.id === props.id) //or id.value
+const thread = computed(() =>
+  threads.value.find((thread) => thread.id === useRoute().params.id)
 );
 
 defineProps({

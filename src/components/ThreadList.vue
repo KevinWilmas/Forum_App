@@ -2,12 +2,12 @@
 import sourceData from "../data.json";
 import { ref } from "vue";
 
-defineProps({
-  threads: {
-    type: Array,
-    required: true,
-  },
-});
+// defineProps({
+//   threads: {
+//     type: Array,
+//     required: true,
+//   },
+// });
 
 const posts = ref(sourceData.posts);
 const users = ref(sourceData.users);
@@ -20,6 +20,17 @@ function userById(userId) {
 }
 </script>
 
+<script>
+export default {
+  props: {
+    threads: {
+      type: Array,
+      required: true,
+    },
+  },
+};
+</script>
+
 <template>
   <div class="col-full">
     <div class="thread-list">
@@ -28,7 +39,10 @@ function userById(userId) {
       <div v-for="thread in threads" :key="thread.id" class="thread">
         <div>
           <p>
-            <a href="#">{{ thread.title }}</a>
+            <router-link
+              :to="{ name: 'ThreadShow', params: { id: thread.id } }"
+              >{{ thread.title }}</router-link
+            >
           </p>
           <p class="text-faded text-xsmall">
             By <a href="#">{{ userById(thread.userId).name }}</a
