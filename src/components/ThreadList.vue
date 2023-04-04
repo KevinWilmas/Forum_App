@@ -1,5 +1,5 @@
 <script setup>
-import sourceData from "../data.json";
+import sourceData from "@/data.json";
 import { ref } from "vue";
 
 // defineProps({
