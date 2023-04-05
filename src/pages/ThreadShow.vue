@@ -1,12 +1,12 @@
 <script setup>
 import sourceData from "@/data.json";
 import PostList from "@/components/PostList.vue";
+import PostEditor from "@/components/PostEditor.vue";
 import { ref, computed } from "vue";
 import { useRoute } from "vue-router";
 
 const threads = ref(sourceData.threads);
 const posts = ref(sourceData.posts);
-const newPostText = ref("");
 
 const thread = computed(() =>
   threads.value.find((thread) => thread.id === useRoute().params.id)
@@ -23,20 +23,14 @@ const props = defineProps({
   },
 });
 
-function addPost() {
-  const postId = "aaaa" + Math.random();
-
+function addPost(eventData) {
   const post = {
-    id: postId,
-    text: newPostText.value,
-    publishedAt: Math.floor(Date.now() / 1000),
+    ...eventData.post,
     threadId: props.id,
-    userId: "rpbB8C6ifrYmNDufMERWfQUoa202",
   };
-  posts.value.push(post);
-  thread.value.posts.push(postId);
 
-  newPostText.value = "";
+  posts.value.push(post);
+  thread.value.posts.push(post.id);
 }
 </script>
 
@@ -45,23 +39,7 @@ function addPost() {
     <h1>{{ thread.title }}</h1>
 
     <post-list :posts="threadPosts" />
-    <div class="col-full">
-      <form @submit.prevent="addPost">
-        <div class="form-group">
-          <textarea
-            v-model="newPostText"
-            name=""
-            id=""
-            cols="30"
-            rows="10"
-            class="form-input"
-          />
-        </div>
-        <div class="form-actions">
-          <button class="btn-blue">Submit post</button>
-        </div>
-      </form>
-    </div>
+    <post-editor @save="addPost" />
   </div>
 </template>
 
