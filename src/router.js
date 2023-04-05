@@ -7,7 +7,7 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home,
+    component: () => import("@/pages/Home.vue"),
   },
   {
     path: "/thread/:id",
@@ -16,13 +16,13 @@ const routes = [
     props: true,
   },
   {
-    path: "/:pathMatch(.*)*",
+    path: "/:catchAll(.*)*",
     name: "NotFound",
     component: NotFound,
   },
 ];
 
 export default createRouter({
-  history: createWebHistory(import.meta.env),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes,
 });

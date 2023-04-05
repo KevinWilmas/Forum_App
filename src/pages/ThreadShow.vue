@@ -4,6 +4,10 @@ import PostList from "@/components/PostList.vue";
 import { ref, computed } from "vue";
 import { useRoute } from "vue-router";
 
+const threads = ref(sourceData.threads);
+const posts = ref(sourceData.posts);
+const newPostText = ref("");
+
 const thread = computed(() =>
   threads.value.find((thread) => thread.id === useRoute().params.id)
 );
@@ -12,31 +16,28 @@ const threadPosts = computed(() =>
   posts.value.filter((post) => post.threadId === useRoute().params.id)
 );
 
-function addPost() {
-  const postId = "aaaa" + Math.random();
-  const post = {
-    id: postId,
-    text: newPostText.value,
-    publishedAt: Math.floor(Date.now() / 1000),
-    threadId: id.value,
-    userId: "rpbB8C6ifrYmNDufMERWfQUoa202",
-  };
-  posts.value.push(post);
-  thread.value.posts.push(postId);
-
-  newPostText = "";
-}
-
-defineProps({
+const props = defineProps({
   id: {
     required: true,
     type: String,
   },
 });
 
-const threads = ref(sourceData.threads);
-const posts = ref(sourceData.posts);
-const newPostText = ref("");
+function addPost() {
+  const postId = "aaaa" + Math.random();
+
+  const post = {
+    id: postId,
+    text: newPostText.value,
+    publishedAt: Math.floor(Date.now() / 1000),
+    threadId: props.id,
+    userId: "rpbB8C6ifrYmNDufMERWfQUoa202",
+  };
+  posts.value.push(post);
+  thread.value.posts.push(postId);
+
+  newPostText.value = "";
+}
 </script>
 
 <template>
