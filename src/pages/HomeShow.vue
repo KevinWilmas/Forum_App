@@ -2,10 +2,6 @@
 import sourceData from "@/data.json";
 import { ref } from "vue";
 
-// components: {
-//   ThreadList
-// },
-
 const threads = ref(sourceData.threads);
 </script>
 

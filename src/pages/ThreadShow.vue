@@ -2,7 +2,6 @@
 import sourceData from "@/data.json";
 
 import { ref, computed } from "vue";
-import { useRoute } from "vue-router";
 
 const threads = ref(sourceData.threads);
 const posts = ref(sourceData.posts);
