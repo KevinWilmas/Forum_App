@@ -1,7 +1,6 @@
 <script setup>
 import sourceData from "@/data.json";
-import PostList from "@/components/PostList.vue";
-import PostEditor from "@/components/PostEditor.vue";
+
 import { ref, computed } from "vue";
 import { useRoute } from "vue-router";
 
@@ -9,11 +8,11 @@ const threads = ref(sourceData.threads);
 const posts = ref(sourceData.posts);
 
 const thread = computed(() =>
-  threads.value.find((thread) => thread.id === useRoute().params.id)
+  threads.value.find((thread) => thread.id === props.id)
 );
 
 const threadPosts = computed(() =>
-  posts.value.filter((post) => post.threadId === useRoute().params.id)
+  posts.value.filter((post) => post.threadId === props.id)
 );
 
 const props = defineProps({

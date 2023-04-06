@@ -1,5 +1,4 @@
 <script setup>
-import ThreadList from "@/components/ThreadList.vue";
 import sourceData from "@/data.json";
 import { ref } from "vue";
 

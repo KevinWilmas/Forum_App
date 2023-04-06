@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import sourceData from "@/data.json";
 
-import AppDate from "@/components/AppDate.vue";
+const users = ref(sourceData.users);
 
 const props = defineProps({
   posts: {
@@ -10,8 +10,6 @@ const props = defineProps({
     type: Array,
   },
 });
-
-const users = ref(sourceData.users);
 
 const diffForUsers = (timestamp) => {
   return dayjs.unix(timestamp).fromNow();

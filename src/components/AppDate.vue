@@ -5,7 +5,12 @@ import localizedDate from "dayjs/plugin/localizedFormat";
 dayjs.extend(relativeTime);
 dayjs.extend(localizedDate);
 
-const props = defineProps({ timestamp: { required: true, type: Number } });
+const props = defineProps({
+  timestamp: {
+    required: true,
+    type: Number,
+  },
+});
 
 const diffForUsers = () => {
   return dayjs.unix(props.timestamp).fromNow();

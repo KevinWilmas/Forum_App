@@ -2,12 +2,12 @@
 import sourceData from "@/data.json";
 import { ref } from "vue";
 
-// defineProps({
-//   threads: {
-//     type: Array,
-//     required: true,
-//   },
-// });
+const props = defineProps({
+  threads: {
+    type: Array,
+    required: true,
+  },
+});
 
 const posts = ref(sourceData.posts);
 const users = ref(sourceData.users);
@@ -18,17 +18,6 @@ function postById(postId) {
 function userById(userId) {
   return users.value.find((p) => p.id === userId);
 }
-</script>
-
-<script>
-export default {
-  props: {
-    threads: {
-      type: Array,
-      required: true,
-    },
-  },
-};
 </script>
 
 <template>
@@ -46,7 +35,7 @@ export default {
           </p>
           <p class="text-faded text-xsmall">
             By <a href="#">{{ userById(thread.userId).name }}</a
-            >, {{ thread.publishedAt }}.
+            >, <AppDate :timestamp="thread.publishedAt" />.
           </p>
         </div>
 
@@ -63,7 +52,9 @@ export default {
             <p class="text-xsmall">
               <a href="#">{{ userById(thread.userId).name }}</a>
             </p>
-            <p class="text-xsmall text-faded">{{ thread.publishedAt }}</p>
+            <p class="text-xsmall text-faded">
+              <AppDate :timestamp="thread.publishedAt" />
+            </p>
           </div>
         </div>
       </div>
