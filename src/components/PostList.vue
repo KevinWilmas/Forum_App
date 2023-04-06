@@ -2,7 +2,9 @@
 import { ref } from "vue";
 import sourceData from "@/data.json";
 
-defineProps({
+import AppDate from "@/components/AppDate.vue";
+
+const props = defineProps({
   posts: {
     required: true,
     type: Array,
@@ -10,6 +12,14 @@ defineProps({
 });
 
 const users = ref(sourceData.users);
+
+const diffForUsers = (timestamp) => {
+  return dayjs.unix(timestamp).fromNow();
+};
+
+const userFriendlyDate = (timestamp) => {
+  return dayjs.unix(timestamp).format("llll");
+};
 
 function userById(userId) {
   return users.value.find((p) => p.id === userId);
@@ -42,7 +52,7 @@ function userById(userId) {
       </div>
 
       <div class="post-date text-faded">
-        {{ post.publishedAt }}
+        <AppDate :timestamp="post.publishedAt" />
       </div>
     </div>
   </div>
