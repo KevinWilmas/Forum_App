@@ -2,12 +2,12 @@
 import sourceData from "@/data.json";
 import { ref } from "vue";
 
-const forums = ref(sourceData.forums);
+const categories = ref(sourceData.categories);
 </script>
 
 <template>
   <h1>Welcome to the Forum</h1>
-  <ForumList :forums="forums" />
+  <CategoryList :categories="categories" />
 </template>
 
 <style scoped>

@@ -3,12 +3,18 @@ import Home from "@/pages/HomeShow.vue";
 import ThreadShow from "@/pages/ThreadShow.vue";
 import NotFound from "@/pages/NotFound.vue";
 import ForumShow from "@/pages/ForumShow.vue";
+import CategoryShow from "@/pages/CategoryShow.vue";
 
 const routes = [
   {
     path: "/",
     name: "Home",
     component: () => import("@/pages/HomeShow.vue"),
+  },
+  {
+    path: "/category/:id",
+    name: "Category",
+    component: CategoryShow,
   },
   {
     path: "/forum/:id",
