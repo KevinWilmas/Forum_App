@@ -15,6 +15,7 @@ const routes = [
     path: "/category/:id",
     name: "Category",
     component: CategoryShow,
+    props: true,
   },
   {
     path: "/forum/:id",
