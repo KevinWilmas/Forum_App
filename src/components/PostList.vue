@@ -1,24 +1,19 @@
 <script setup>
 import { ref } from "vue";
 import sourceData from "@/data.json";
-
 const users = ref(sourceData.users);
-
 const props = defineProps({
   posts: {
     required: true,
     type: Array,
   },
 });
-
 const diffForUsers = (timestamp) => {
   return dayjs.unix(timestamp).fromNow();
 };
-
 const userFriendlyDate = (timestamp) => {
   return dayjs.unix(timestamp).format("llll");
 };
-
 function userById(userId) {
   return users.value.find((p) => p.id === userId);
 }

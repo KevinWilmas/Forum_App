@@ -1,17 +1,18 @@
 <script setup>
-import sourceData from "@/data.json";
+import { useThreadsStore } from "@/stores/ThreadsStore";
+import { usePostsStore } from "@/stores/PostsStore";
+import { computed } from "vue";
+import { storeToRefs } from "pinia";
 
-import { ref, computed } from "vue";
-
-const threads = ref(sourceData.threads);
-const posts = ref(sourceData.posts);
+const threadsStore = storeToRefs(useThreadsStore());
+const postsStore = storeToRefs(usePostsStore());
 
 const thread = computed(() =>
-  threads.value.find((thread) => thread.id === props.id)
+  threadsStore.threads.find((thread) => thread.id === props.id)
 );
 
 const threadPosts = computed(() =>
-  posts.value.filter((post) => post.threadId === props.id)
+  postsStore.posts.filter((post) => post.threadId === props.id)
 );
 
 const props = defineProps({
@@ -26,9 +27,7 @@ function addPost(eventData) {
     ...eventData.post,
     threadId: props.id,
   };
-
-  posts.value.push(post);
-  thread.value.posts.push(post.id);
+  postsStore.createPost(post);
 }
 </script>
 

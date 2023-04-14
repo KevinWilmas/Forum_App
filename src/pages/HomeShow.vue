@@ -1,8 +1,7 @@
 <script setup>
-import sourceData from "@/data.json";
-import { ref } from "vue";
-
-const categories = ref(sourceData.categories);
+import { useCategoriesStore } from "@/components/stores/CategoriesStore";
+import { storeToRefs } from "pinia";
+const { categories } = storeToRefs(useCategoriesStore());
 </script>
 
 <template>

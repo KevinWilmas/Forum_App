@@ -1,13 +1,10 @@
 <script setup>
 import ForumList from "./ForumList.vue";
 import sourceData from "@/data.json";
-
 // import { ref } from 'vue'
-
 function getForumsForCategory(category) {
   return sourceData.forums.filter((forum) => forum.categoryId === category.id);
 }
-
 const props = defineProps({
   categories: {
     required: true,
