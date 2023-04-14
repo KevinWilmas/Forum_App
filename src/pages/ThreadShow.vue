@@ -1,16 +1,18 @@
 <script setup>
-import { useThreadsStore } from "@/stores/ThreadsStore";
-import { usePostsStore } from "@/stores/PostsStore";
-import { computed } from "vue";
-import { storeToRefs } from "pinia";
+import { useThreadsStore } from "@/components/stores/ThreadsStore.js";
+import { usePostsStore } from "@/components/stores/PostsStore.js";
 
-const threadsStore = storeToRefs(useThreadsStore());
-const postsStore = storeToRefs(usePostsStore());
+import { computed } from "vue";
+
+const threadsStore = useThreadsStore();
+const postsStore = usePostsStore();
+
+// const { threads } = ref(sourceData.threads);
+// const posts = ref(sourceData.posts);
 
 const thread = computed(() =>
   threadsStore.threads.find((thread) => thread.id === props.id)
 );
-
 const threadPosts = computed(() =>
   postsStore.posts.filter((post) => post.threadId === props.id)
 );
@@ -28,6 +30,8 @@ function addPost(eventData) {
     threadId: props.id,
   };
   postsStore.createPost(post);
+  // posts.value.push(post);
+  // thread.value.posts.push(post.id);
 }
 </script>
 
@@ -44,7 +48,6 @@ function addPost(eventData) {
 .post-list {
   margin-top: 20px;
 }
-
 .post {
   display: flex;
   flex-wrap: wrap;
@@ -55,13 +58,11 @@ function addPost(eventData) {
   box-shadow: 2px 2px 1px rgba(136, 136, 136, 0.09);
   margin-bottom: 20px;
 }
-
 @media (max-width: 820px) {
   .post {
     padding: 0;
   }
 }
-
 .post .user-info {
   display: flex;
   flex-direction: column;
@@ -71,11 +72,9 @@ function addPost(eventData) {
   flex: 1 1 15%;
   margin-right: 5px;
 }
-
 .post .user-info > * {
   margin-bottom: 10px;
 }
-
 @media (max-width: 820px) {
   .post .user-info {
     order: -2;
@@ -86,24 +85,20 @@ function addPost(eventData) {
     padding: 5px;
     padding-left: 10px;
   }
-
   .post .user-info .avatar-large {
     height: 35px;
     width: 35px;
     margin-right: 5px;
     order: 1;
   }
-
   .post .user-info .user-name {
     order: 2;
   }
-
   .post .user-info > * {
     margin-right: 5px;
     margin-bottom: 0;
   }
 }
-
 .post .post-date {
   flex-basis: 100%;
   font-size: 14px;
@@ -111,7 +106,6 @@ function addPost(eventData) {
   margin-bottom: 5px;
   padding-right: 7px;
 }
-
 @media (max-width: 820px) {
   .post .post-date {
     order: -1;
@@ -122,13 +116,11 @@ function addPost(eventData) {
     margin-bottom: 0px;
   }
 }
-
 @media (max-width: 720px) {
   .post {
     padding: 0px;
   }
 }
-
 .post-content {
   display: flex;
   flex: 1 0 83%;
@@ -139,17 +131,14 @@ function addPost(eventData) {
   line-height: 1.5;
   word-break: break-word;
 }
-
 .post-content h1,
 .post-content h2,
 .post-content h3 {
   margin-bottom: 0;
 }
-
 .post-content p {
   margin-bottom: 20px;
 }
-
 .post-content pre {
   display: grid;
   overflow: auto;
@@ -157,16 +146,13 @@ function addPost(eventData) {
   border-radius: 3px;
   padding: 10px;
 }
-
 .post-content blockquote {
   margin: 25px 0px;
 }
-
 .post-content blockquote.big {
   display: flex;
   position: relative;
 }
-
 .post-content blockquote.big::before {
   position: absolute;
   top: -25px;
@@ -176,7 +162,6 @@ function addPost(eventData) {
   content: "\f10e";
   color: #263959;
 }
-
 @media (max-width: 820px) {
   .post-content blockquote.big::before {
     top: -15px;
@@ -184,7 +169,6 @@ function addPost(eventData) {
     font-size: 32px;
   }
 }
-
 .post-content blockquote.big .quote {
   padding-left: 20px;
   padding-right: 15px;
@@ -193,7 +177,6 @@ function addPost(eventData) {
   font-style: italic;
   font-size: 17px;
 }
-
 .post-content blockquote.big .author {
   display: flex;
   flex-direction: column;
@@ -201,7 +184,6 @@ function addPost(eventData) {
   justify-content: flex-start;
   text-align: center;
 }
-
 .post-content blockquote.big .author img {
   flex: 1;
   flex-basis: 100%;
@@ -209,7 +191,6 @@ function addPost(eventData) {
   width: 80px;
   height: 80px;
 }
-
 .post-content blockquote.small {
   position: relative;
   flex-direction: column;
@@ -217,7 +198,6 @@ function addPost(eventData) {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
-
 .post-content blockquote.small::before {
   position: absolute;
   top: -20px;
@@ -227,7 +207,6 @@ function addPost(eventData) {
   content: "\f10e";
   color: #263959;
 }
-
 @media (max-width: 820px) {
   .post-content blockquote.small::before {
     top: -18px;
@@ -235,7 +214,6 @@ function addPost(eventData) {
     font-size: 32px;
   }
 }
-
 .post-content blockquote.small .author {
   display: flex;
   flex-basis: 100%;
@@ -244,20 +222,16 @@ function addPost(eventData) {
   justify-content: center;
   align-items: center;
 }
-
 .post-content blockquote.small .author .time {
   margin-left: 10px;
 }
-
 .post-content blockquote.small .author .fa {
   margin-left: auto;
   font-size: 20px;
 }
-
 .post-content blockquote.small .author .fa:hover {
   cursor: pointer;
 }
-
 .post-content blockquote.small .quote {
   display: flex;
   flex-basis: 100%;
@@ -267,7 +241,6 @@ function addPost(eventData) {
   font-style: italic;
   font-size: 17px;
 }
-
 .post-content blockquote.simple {
   position: relative;
   padding: 0px 10px 0px 20px;
@@ -276,7 +249,6 @@ function addPost(eventData) {
   font-size: 17px;
   letter-spacing: 0.15px;
 }
-
 .post-content blockquote.simple::before {
   position: absolute;
   top: -25px;
@@ -286,7 +258,6 @@ function addPost(eventData) {
   content: "\f10e";
   color: #263959;
 }
-
 @media (max-width: 820px) {
   .post-content blockquote.simple::before {
     top: -15px;
@@ -294,21 +265,17 @@ function addPost(eventData) {
     font-size: 32px;
   }
 }
-
 .post-content blockquote.simple .author {
   display: block;
   margin-top: 10px;
   font-weight: normal;
 }
-
 .post-content blockquote.simple .author .time {
   margin-left: 10px;
 }
-
 .post-listing-editor {
   flex: 1 1 83%;
 }
-
 .profile-card {
   padding: 10px 20px 20px 20px;
   margin-bottom: 10px;

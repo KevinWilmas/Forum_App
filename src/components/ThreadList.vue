@@ -1,8 +1,6 @@
 <script setup>
-import { useUsersStore } from "@/stores/UsersStore";
-import { usePostsStore } from "@/stores/PostsStore";
-import { ref, computed } from "vue";
-import { storeToRefs } from "pinia";
+import sourceData from "@/data.json";
+import { ref } from "vue";
 
 const props = defineProps({
   threads: {
@@ -11,8 +9,15 @@ const props = defineProps({
   },
 });
 
-const postsStore = storeToRefs(usePostsStore());
-const usersStore = storeToRefs(useUsersStore());
+const posts = ref(sourceData.posts);
+const users = ref(sourceData.users);
+
+function postById(postId) {
+  return posts.value.find((p) => p.id === postId);
+}
+function userById(userId) {
+  return users.value.find((p) => p.id === userId);
+}
 </script>
 
 <template>
@@ -29,7 +34,7 @@ const usersStore = storeToRefs(useUsersStore());
             >
           </p>
           <p class="text-faded text-xsmall">
-            By <a href="#">{{ usersStore.userById(thread.userId).name }}</a
+            By <a href="#">{{ userById(thread.userId).name }}</a
             >, <AppDate :timestamp="thread.publishedAt" />.
           </p>
         </div>
@@ -39,7 +44,7 @@ const usersStore = storeToRefs(useUsersStore());
 
           <img
             class="avatar-medium"
-            :src="usersStore.userById(thread.userId).avatar"
+            :src="userById(thread.userId).avatar"
             alt=""
           />
 

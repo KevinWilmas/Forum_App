@@ -1,8 +1,8 @@
 import { defineStore } from "pinia";
 import sourceData from "@/data.json";
-import { useThreadsStore } from "@/ThreadsStore";
+import { useThreadsStore } from "./ThreadsStore";
 
-export const useCategoriesStore = defineStore("PostsStore", {
+export const usePostsStore = defineStore("PostsStore", {
   state: () => {
     return {
       posts: sourceData.posts,
@@ -13,7 +13,7 @@ export const useCategoriesStore = defineStore("PostsStore", {
     createPost(post) {
       post.id = "ggqq" + Math.random();
       this.posts.push(post);
-
+      // append post to thread
       const thread = useThreadsStore().threads.find(
         (thread) => thread.id === post.threadId
       );

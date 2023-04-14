@@ -7,9 +7,6 @@ export const useCategoriesStore = defineStore("UsersStore", {
       threads: sourceData.users,
     };
   },
-  getters: {
-    postById: (state) => posts.value.find((p) => p.id === state),
-    userById: (state) => users.value.find((p) => p.id === state),
-  },
+  getters: {},
   actions: {},
 });
