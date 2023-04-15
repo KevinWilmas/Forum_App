@@ -1,7 +1,11 @@
 <script setup>
 import { computed } from "vue";
 import ForumList from "@/components/ForumList.vue";
-import sourceData from "@/data.json";
+import { useCategoriesStore } from "@/components/stores/CategoriesStore.js";
+import { useForumsStore } from "@/components/stores/ForumsStore.js";
+
+const categoriesStore = useThreadsStore();
+const forumsStore = useForumsStore();
 
 const props = defineProps({
   id: {
@@ -11,11 +15,13 @@ const props = defineProps({
 });
 
 const category = computed(() => {
-  return sourceData.categories.find((category) => category.id === props.id);
+  return categoriesStore.categories.find(
+    (category) => category.id === props.id
+  );
 });
 
 function getForumsForCategory(category) {
-  return sourceData.forums.filter((forum) => forum.categoryId === category.id);
+  return forumsStore.forums.filter((forum) => forum.categoryId === category.id);
 }
 </script>
 

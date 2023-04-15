@@ -1,10 +1,10 @@
 import { defineStore } from "pinia";
 import sourceData from "@/data.json";
 
-export const useUsersStore = defineStore("UsersStore", {
+export const useForumsStore = defineStore("ForumsStore", {
   state: () => {
     return {
-      users: sourceData.users,
+      forums: sourceData.forums,
     };
   },
   getters: {},

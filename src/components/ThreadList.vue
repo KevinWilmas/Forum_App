@@ -1,6 +1,14 @@
 <script setup>
-import sourceData from "@/data.json";
 import { ref } from "vue";
+import { useUsersStore } from "@/components/stores/UsersStore.js";
+import { usePostsStore } from "@/components/stores/PostsStore.js";
+import { storeToRefs } from "pinia";
+
+// const userss = storeToRefs(useUsersStore());
+// const postss = storeToRefs(usePostsStore());
+
+const usersStore = useUsersStore();
+const postsStore = usePostsStore();
 
 const props = defineProps({
   threads: {
@@ -9,14 +17,11 @@ const props = defineProps({
   },
 });
 
-const posts = ref(sourceData.posts);
-const users = ref(sourceData.users);
-
 function postById(postId) {
-  return posts.value.find((p) => p.id === postId);
+  return postsStore.posts.find((p) => p.id === postId);
 }
 function userById(userId) {
-  return users.value.find((p) => p.id === userId);
+  return usersStore.users.find((p) => p.id === userId);
 }
 </script>
 
