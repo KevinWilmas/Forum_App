@@ -7,6 +7,8 @@ export const useUsersStore = defineStore("UsersStore", {
       users: sourceData.users,
     };
   },
-  getters: {},
+  getters: {
+    // userById: (state) => users.find((p) => p.id === userId),
+  },
   actions: {},
 });

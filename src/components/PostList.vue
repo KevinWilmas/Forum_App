@@ -1,7 +1,9 @@
 <script setup>
 import { ref } from "vue";
-import sourceData from "@/data.json";
-const users = ref(sourceData.users);
+import { useUsersStore } from "@/components/stores/UsersStore.js";
+
+const usersStore = useUsersStore();
+
 const props = defineProps({
   posts: {
     required: true,
@@ -15,7 +17,7 @@ const userFriendlyDate = (timestamp) => {
   return dayjs.unix(timestamp).format("llll");
 };
 function userById(userId) {
-  return users.value.find((p) => p.id === userId);
+  return usersStore.users.find((p) => p.id === userId);
 }
 </script>
 
