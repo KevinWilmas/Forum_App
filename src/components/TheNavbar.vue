@@ -1,5 +1,9 @@
 <script setup>
-// import { ref } from 'vue'
+// import { ref } from "vue";
+import { useUsersStore } from "./stores/UsersStore.js";
+import { storeToRefs } from "pinia";
+
+const { authUser } = storeToRefs(useUsersStore());
 </script>
 
 <template>
@@ -22,11 +26,11 @@
           <a href="#">
             <img
               class="avatar-small"
-              src="https://pbs.twimg.com/profile_images/1188775562657091594/5mgkg44t_400x400.jpg"
-              alt=""
+              :src="authUser.avatar"
+              :alt="`${authUser.name} profile picture`"
             />
             <span>
-              Alex Kyriakidis
+              {{ authUser.name }}
               <img
                 class="icon-profile"
                 src="../assets/svg/arrow-profile.svg"
