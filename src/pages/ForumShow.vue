@@ -1,6 +1,5 @@
 <script setup>
 import { ref, computed } from "vue";
-import ThreadList from "@/components/ThreadList.vue";
 import { useThreadsStore } from "@/components/stores/ThreadsStore.js";
 import { useForumsStore } from "@/components/stores/ForumsStore.js";
 

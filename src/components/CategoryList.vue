@@ -1,5 +1,4 @@
 <script setup>
-import ForumList from "./ForumList.vue";
 import { useForumsStore } from "@/components/stores/ForumsStore.js";
 const forumsStore = useForumsStore();
 

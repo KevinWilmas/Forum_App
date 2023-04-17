@@ -1,6 +1,5 @@
 <script setup>
 import { computed } from "vue";
-import ForumList from "@/components/ForumList.vue";
 import { useCategoriesStore } from "@/components/stores/CategoriesStore.js";
 import { useForumsStore } from "@/components/stores/ForumsStore.js";
 

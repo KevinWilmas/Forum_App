@@ -1,13 +1,12 @@
-<script>
-export default {
-  name: "App"
-};
-</script>
+<script></script>
 
 <template>
-  <div class="container"><router-view></router-view></div>
+  <the-navbar />
+  <div class="container">
+    <router-view> </router-view>
+  </div>
 </template>
 
-<style scoped>
-@import "assets/style.css"
+<style>
+@import "assets/style.css";
 </style>
