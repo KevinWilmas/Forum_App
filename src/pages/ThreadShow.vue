@@ -9,7 +9,7 @@ const postsStore = usePostsStore();
 
 // const { threads } = ref(sourceData.threads);
 // const posts = ref(sourceData.posts);
-
+ 
 const thread = computed(() =>
   threadsStore.threads.find((thread) => thread.id === props.id)
 );
