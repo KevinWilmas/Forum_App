@@ -4,12 +4,18 @@ import ThreadShow from "@/pages/ThreadShow.vue";
 import NotFound from "@/pages/NotFound.vue";
 import ForumShow from "@/pages/ForumShow.vue";
 import CategoryShow from "@/pages/CategoryShow.vue";
+import Profile from "@/pages/ProfileShow.vue";
 
 const routes = [
   {
     path: "/",
     name: "Home",
     component: () => import("@/pages/HomeShow.vue"),
+  },
+  {
+    path: "/me",
+    name: "Profile",
+    component: Profile,
   },
   {
     path: "/category/:id",

@@ -6,7 +6,7 @@ export const useUsersStore = defineStore("UsersStore", {
   state: () => {
     return {
       users: sourceData.users,
-      authId: "VXjpr2WHa8Ux4Bnggym8QFLdv5C3",
+      authId: "rpbB8C6ifrYmNDufMERWfQUoa202",
     };
   },
   getters: {

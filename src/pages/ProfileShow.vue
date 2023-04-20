@@ -1,18 +1,37 @@
 <script setup>
 import { computed } from "vue";
 import PostList from "@/components/PostList.vue";
-import { storeToRefs } from "pinia";
-import { useThreadsStore } from "@/components/stores/ThreadsStore.js";
+import { mapGetters, storeToRefs } from "pinia";
+import { useForumsStore } from "@/components/stores/ForumsStore.js";
 import { usePostsStore } from "@/components/stores/PostsStore.js";
 import { useUsersStore } from "@/components/stores/UsersStore.js";
 
-const usersStore = storeToRefs(useUsersStore());
+const usersStore = useUsersStore();
 const forumsStore = useForumsStore();
-const postsStore = usepostsStore();
+const postsStore = usePostsStore();
+
+// ***OPTIONS API AND VUEX***
+//
+// components: {PostList},
+// computed: {
+//   ...mapGetters({user: 'authUser'}),
+//   userPosts () {
+//     return this.$store.state.posts.filter(posts => posts.userId === this.user.id)
+//   },
+//   usersPostsCount () {
+//     return this.userPosts.length
+//   },
+//   userThreads () {
+//     return this.$store.state.threads.filter(thread => thread.userId === this.user.id)
+//   },
+//   userThreadsCount () {
+//     return this.userThreads.length
+//   }
+// }
 
 const userPosts = computed(() => {
   return postsStore.posts.filter(
-    (posts) => posts.userId === usersStore.authid.id
+    (posts) => posts.userId === usersStore.authId.id
   );
 });
 
@@ -21,7 +40,7 @@ const usersPostsCount = computed(() => {
 });
 const userThreads = computed(() => {
   return forumsStore.forums.find(
-    (thread) => thread.userId === usersStore.authid.id
+    (thread) => thread.userId === usersStore.authId.id
   );
 });
 
@@ -37,19 +56,23 @@ const userThreadsCount = computed(() => {
         <div class="profile-card">
           <p class="text-center">
             <img
-              :src="user.avatar"
-              :alt="`${user.name} profile picture`"
+              :src="usersStore.authUser.avatar"
+              :alt="`${usersStore.authUser.name} profile picture`"
               class="avatar-xlarge"
             />
           </p>
 
-          <h1 class="title">{{ user.username }}</h1>
+          <h1 class="title">{{ usersStore.authUser.username }}</h1>
 
-          <p class="text-lead">{{ user.name }}</p>
+          <p class="text-lead">{{ usersStore.authUser.name }}</p>
 
-          <p class="text-justify">{{ user.bio || "No bio specified." }}</p>
+          <p class="text-justify">
+            {{ usersStore.authUser.bio || "No bio specified." }}
+          </p>
 
-          <span class="online">{{ user.username }} is online</span>
+          <span class="online"
+            >{{ usersStore.authUser.username }} is online</span
+          >
 
           <div class="stats">
             <span>{{ userPostsCount }} posts</span>
@@ -58,9 +81,11 @@ const userThreadsCount = computed(() => {
 
           <hr />
 
-          <p v-if="user.website" class="text-large text-center">
+          <p v-if="usersStore.authUser.website" class="text-large text-center">
             <i class="fa fa-globe"></i>
-            <a :href="user.website">{{ user.website }}</a>
+            <a :href="usersStore.authUser.website">{{
+              usersStore.authUser.website
+            }}</a>
           </p>
         </div>
 
@@ -82,7 +107,8 @@ const userThreadsCount = computed(() => {
           <a href="#">See only started threads?</a>
         </div>
         <hr />
-        <PostList :posts="userPosts" />
+        <!-- FIX ME -->
+        <PostList :posts="usersStore.authUser.posts" />
       </div>
     </div>
   </div>

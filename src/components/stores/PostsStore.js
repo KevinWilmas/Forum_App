@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import sourceData from "@/data.json";
 import { useThreadsStore } from "./ThreadsStore";
+import { useUsersStore } from "./UsersStore";
 
 export const usePostsStore = defineStore("PostsStore", {
   state: () => {
@@ -9,6 +10,10 @@ export const usePostsStore = defineStore("PostsStore", {
     };
   },
   getters: {},
+  //   userPosts: (state) =>
+  //     state.posts.filter((post) => post.userId === useUsersStore.authUser.id),
+  // },
+  // userPostsCount: (state) => state.userPosts.length
   actions: {
     createPost(post) {
       post.id = "ggqq" + Math.random();
