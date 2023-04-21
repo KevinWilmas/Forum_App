@@ -1,9 +1,9 @@
 <script setup>
 // import { ref } from "vue";
-import { useUsersStore } from "./stores/UsersStore.js";
+import { useAuthUsersStore } from "./stores/AuthUsersStore.js";
 import { storeToRefs } from "pinia";
 
-const { authUser } = storeToRefs(useUsersStore());
+const { authUser } = storeToRefs(useAuthUsersStore());
 </script>
 
 <template>
