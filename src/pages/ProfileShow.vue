@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from "vue";
 import PostList from "@/components/PostList.vue";
-import { mapGetters, storeToRefs } from "pinia";
+import { storeToRefs } from "pinia";
 import { useForumsStore } from "@/components/stores/ForumsStore.js";
 import { usePostsStore } from "@/components/stores/PostsStore.js";
 import { useUsersStore } from "@/components/stores/UsersStore.js";
@@ -15,9 +15,9 @@ const postsStore = usePostsStore();
 // components: {PostList},
 // computed: {
 //   ...mapGetters({user: 'authUser'}),
-//   userPosts () {
-//     return this.$store.state.posts.filter(posts => posts.userId === this.user.id)
-//   },
+// userPosts () {
+//   return this.$store.state.posts.filter(posts => posts.userId === this.user.id)
+// },
 //   usersPostsCount () {
 //     return this.userPosts.length
 //   },
@@ -31,7 +31,7 @@ const postsStore = usePostsStore();
 
 const userPosts = computed(() => {
   return postsStore.posts.filter(
-    (posts) => posts.userId === usersStore.authId.id
+    (posts) => posts.userId === usersStore.authUser.id
   );
 });
 
@@ -40,7 +40,7 @@ const usersPostsCount = computed(() => {
 });
 const userThreads = computed(() => {
   return forumsStore.forums.find(
-    (thread) => thread.userId === usersStore.authId.id
+    (thread) => thread.userId === usersStore.authUser.id
   );
 });
 
@@ -108,7 +108,7 @@ const userThreadsCount = computed(() => {
         </div>
         <hr />
         <!-- FIX ME -->
-        <PostList :posts="usersStore.authUser.posts" />
+        <PostList :posts="userPosts" />
       </div>
     </div>
   </div>
