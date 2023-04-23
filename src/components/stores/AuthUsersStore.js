@@ -9,7 +9,7 @@ export const useAuthUsersStore = defineStore("AuthUsersStore", {
   state: () => {
     return {
       users: useUsersStore().users,
-      authId: "rpbB8C6ifrYmNDufMERWfQUoa202",
+      authId: "VXjpr2WHa8Ux4Bnggym8QFLdv5C3",
     };
   },
   getters: {

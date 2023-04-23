@@ -3,6 +3,7 @@ import { computed } from "vue";
 import PostList from "@/components/PostList.vue";
 import { storeToRefs } from "pinia";
 import UserProfileCard from "@/components/UserProfileCard.vue";
+import UserProfileEditorCard from "@/components/UserProfileEditorCard.vue";
 import { useAuthUsersStore } from "@/components/stores/AuthUsersStore";
 
 const authUsersStore = useAuthUsersStore();
@@ -14,6 +15,7 @@ const user = authUsersStore.authUser;
     <div class="flex-grid">
       <div class="col-3 push-top">
         <UserProfileCard :user="user" />
+        <UserProfileEditorCard :user="user" />
         <p class="text-xsmall text-faded text-center">
           Member since june 2003, last visited 4 hours ago
         </p>
