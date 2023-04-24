@@ -16,6 +16,10 @@ const props = defineProps({
 function save() {
   usersStore.updateUser({ ...activeUser });
   // again here it's a reference, so passing a clone is a must do
+  router.push({ name: "Profile" });
+}
+function cancel() {
+  router.push({ name: "Profile" });
 }
 </script>
 
@@ -95,7 +99,7 @@ function save() {
       </div>
 
       <div class="btn-group space-between">
-        <button class="btn-ghost">Cancel</button>
+        <button class="btn-ghost" @click="cancel">Cancel</button>
         <button type="submit" class="btn-blue">Save</button>
       </div>
     </form>
