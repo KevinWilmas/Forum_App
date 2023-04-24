@@ -23,11 +23,11 @@ const { authUser } = storeToRefs(useAuthUsersStore());
     <nav class="navbar">
       <ul>
         <li class="navbar-user">
-          <a href="#">
+          <router-link :to="{ name: 'Profile' }">
             <img
               class="avatar-small"
               :src="authUser.avatar"
-              :alt="`${authUser.name} profile picture`"
+              alt="`${authUser.name} profile picture`"
             />
             <span>
               {{ authUser.name }}
@@ -37,7 +37,7 @@ const { authUser } = storeToRefs(useAuthUsersStore());
                 alt=""
               />
             </span>
-          </a>
+          </router-link>
 
           <!-- dropdown menu -->
           <!-- add class "active-drop" to show the dropdown -->

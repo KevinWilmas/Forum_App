@@ -16,10 +16,7 @@ function save() {
   const postId = "aaaa" + Math.random();
 
   const post = {
-    id: postId,
     text: text.value,
-    publishedAt: Math.floor(Date.now() / 1000),
-    userId: "rpbB8C6ifrYmNDufMERWfQUoa202",
   };
 
   emit("save", { post }); //access under eventData.post
