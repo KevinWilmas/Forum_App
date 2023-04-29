@@ -1,14 +1,29 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { useThreadsStore } from "@/components/stores/ThreadsStore";
+import { useForumsStore } from "../components/stores/ForumsStore";
+import { storeToRefs } from "pinia";
+const { createThread } = useThreadsStore();
+const { forums } = storeToRefs(useForumsStore());
 
 const props = defineProps({
-  forum: { type: Object, required: true },
+  forumId: { type: String, required: true },
 });
+
+const forum = computed(() =>
+  forums.value.find((forum) => forum.id === props.forumId)
+);
 
 const title = ref("");
 const text = ref("");
 
-function save() {}
+function save() {
+  createThread({
+    text: text.value,
+    title: title.value,
+    forumId: forum.value.id,
+  });
+}
 </script>
 
 <template>
