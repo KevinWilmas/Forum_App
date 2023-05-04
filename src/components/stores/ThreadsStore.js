@@ -23,22 +23,22 @@ export const useThreadsStore = defineStore("ThreadsStore", {
     //   commit('appendThreadToForum', { forumId, threadId: id })
     //   dispatch('createPost', { text, threadId: id })
     // },
-    createThread({ text, title, forumId }) {
+    async createThread({ text, title, forumId }) {
       const id = "ggqq" + Math.random();
       const userId = useAuthUsersStore().authId;
       const publishedAt = Math.floor(Date.now() / 1000);
       const thread = { forumId, title, publishedAt, userId, id, posts: [] };
 
-      // add thread to threads
+      // add thread to threads (SET THREAD)
       this.threads.push(thread);
 
-      // add thread to the user
+      // add thread to the user (APPEND THREAD TO USER)
       const usersStore = useUsersStore();
       const user = usersStore.users.find((user) => user.id === userId);
       user.threads = user.threads || [];
       user.threads.push(id);
 
-      // add thread to the forum
+      // add thread to the forum (APPEND THREAD TO FORUM)
       const forums = useForumsStore();
       forums.threads = forums.threads || [];
       forums.threads.push(id);
@@ -46,6 +46,7 @@ export const useThreadsStore = defineStore("ThreadsStore", {
       // create the post
       const { createPost } = usePostsStore();
       createPost({ text, threadId: id });
+      return this.threads.find((thread) => thread.id === id);
     },
   },
 });

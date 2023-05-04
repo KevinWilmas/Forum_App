@@ -3,6 +3,8 @@ import { ref, computed } from "vue";
 import { useThreadsStore } from "@/components/stores/ThreadsStore";
 import { useForumsStore } from "../components/stores/ForumsStore";
 import { storeToRefs } from "pinia";
+import router from "@/router";
+
 const { createThread } = useThreadsStore();
 const { forums } = storeToRefs(useForumsStore());
 
@@ -17,12 +19,16 @@ const forum = computed(() =>
 const title = ref("");
 const text = ref("");
 
-function save() {
-  createThread({
-    text: text.value,
-    title: title.value,
+async function save() {
+  const thread = await createThread({
     forumId: forum.value.id,
+    title: title.value,
+    text: text.value,
   });
+  router.push({ name: "ThreadShow", params: { id: thread.id } });
+}
+function cancel() {
+  router.push({ name: "Forum", params: { id: props.forumId } });
 }
 </script>
 
@@ -57,7 +63,7 @@ function save() {
       </div>
 
       <div class="btn-group">
-        <button class="btn btn-ghost">Cancel</button>
+        <button @click="cancel" class="btn btn-ghost">Cancel</button>
         <button class="btn btn-blue" type="submit" name="Publish">
           Publish
         </button>
