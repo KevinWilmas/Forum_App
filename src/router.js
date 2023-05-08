@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "@/pages/HomeShow.vue";
 import ThreadCreate from "@/pages/ThreadCreate.vue";
+import ThreadEdit from "@/pages/ThreadEdit.vue";
 import ThreadShow from "@/pages/ThreadShow.vue";
 import NotFound from "@/pages/NotFound.vue";
 import ForumShow from "@/pages/ForumShow.vue";
@@ -44,9 +45,15 @@ const routes = [
     props: true,
   },
   {
-    path: "/form/:forumId/thread/create",
+    path: "/forum/:forumId/thread/create",
     name: "ThreadCreate",
     component: ThreadCreate,
+    props: true,
+  },
+  {
+    path: "/thread/:id/edit",
+    name: "ThreadEdit",
+    component: ThreadEdit,
     props: true,
   },
   {

@@ -1,13 +1,23 @@
 <script setup>
 import { ref } from "vue";
 
-const title = ref("");
-const text = ref("");
+const form = ref({ title: props.title, text: props.text });
+
+const props = defineProps({
+  title: {
+    default: "",
+    type: String,
+  },
+  text: {
+    default: "",
+    type: String,
+  },
+});
 
 const emit = defineEmits(["save", "cancel"]);
 
 function save() {
-  emit("save", { title: title.value, text: text.value });
+  emit("save", { ...form });
 }
 </script>
 
@@ -16,7 +26,7 @@ function save() {
     <div class="form-group">
       <label for="thread_title">Title:</label>
       <input
-        v-model="title"
+        v-model="form.title"
         type="text"
         id="thread_title"
         class="form-input"
@@ -27,7 +37,7 @@ function save() {
     <div class="form-group">
       <label for="thread_content">Content:</label>
       <textarea
-        v-model="text"
+        v-model="form.text"
         id="thread_content"
         class="form-input"
         name="content"
