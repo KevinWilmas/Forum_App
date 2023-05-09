@@ -6,6 +6,7 @@ import { storeToRefs } from "pinia";
 import router from "@/router";
 import { usePostsStore } from "../components/stores/PostsStore";
 
+const { createThread } = useThreadsStore();
 const threadStore = useThreadsStore();
 const postsStore = usePostsStore();
 const { forums } = storeToRefs(useForumsStore());
@@ -23,7 +24,7 @@ const text = computed(
 );
 
 async function save(title, text) {
-  const thread = await threadStore({
+  const thread = await createThread({
     id: props.threadId,
     title,
     text,

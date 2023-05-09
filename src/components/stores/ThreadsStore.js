@@ -70,8 +70,8 @@ export const useThreadsStore = defineStore("ThreadsStore", {
       forums.threads.push(id);
 
       // (DISPATCH CREATE POST) create the post
-      const { postsStore } = usePostsStore();
-      postsStore({ text, threadId: id });
+      const { createPost } = usePostsStore();
+      createPost({ text, threadId: id });
       return this.threads.find((thread) => thread.id === id);
     },
 
